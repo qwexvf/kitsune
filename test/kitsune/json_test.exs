@@ -39,7 +39,7 @@ defmodule JSONTest do
   end
 
   test "Collection to json", %{song: _song, album: album} do
-    json = "{\"songs\":[{\"title\":\"Gin and Juice\"},{\"title\":\"Lodi Dodi\"}],\"name\":\"Doggystyle\"}"
+    json = "{\"name\":\"Doggystyle\",\"songs\":[{\"title\":\"Gin and Juice\"},{\"title\":\"Lodi Dodi\"}]}"
     assert AlbumRepresenter.to_json(album) == json
   end
 
