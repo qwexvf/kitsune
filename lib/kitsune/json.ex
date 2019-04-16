@@ -90,11 +90,11 @@ defmodule Kitsune.JSON do
     from = Keyword.get(opts, :from)
     quote do
       @collections [%{
-                      label: unquote(label),
-                      as: unquote(as),
-                      extend: unquote(extend),
-                      from: unquote(from)
-                     } | @collections ]
+        label: unquote(label),
+        as: unquote(as),
+        extend: unquote(extend),
+        from: unquote(from)
+      } | @collections ]
     end
   end
 
@@ -102,8 +102,8 @@ defmodule Kitsune.JSON do
     quote do
       def to_json(struct) do
         map =  _map_from_collections(struct)
-            |> _map_from_properties(struct)
-        {:ok, json} = Poison.encode(map)
+               |> _map_from_properties(struct)
+        {:ok, json} = Jason.encode(map)
         json
       end
 
@@ -122,7 +122,7 @@ defmodule Kitsune.JSON do
       end
 
       defp _unjson(json) do
-        {:ok, decoded} = Poison.decode(json)
+        {:ok, decoded} = Jason.decode(json)
         decoded
       end
 
@@ -136,7 +136,7 @@ defmodule Kitsune.JSON do
           { as,
             Map.get(decoded, Atom.to_string(label))
             |> Enum.map(fn(x) ->
-              {:ok, struct_json} = Poison.encode(x)
+              {:ok, struct_json} = Jason.encode(x)
               extend.from_json(struct_json, from)
             end)
           }

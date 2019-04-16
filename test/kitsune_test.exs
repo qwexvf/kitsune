@@ -8,7 +8,7 @@ defmodule PersonRepresenter do
   property :name
   property :age
 end
- 
+
 defmodule KitsuneTest do
   use ExUnit.Case
   doctest Kitsune
@@ -20,11 +20,11 @@ defmodule KitsuneTest do
 
   test "Transforms data to json", %{person: person} do   
     json = PersonRepresenter.to_json(person)
-    assert json == "{\"name\":\"Nikki\",\"age\":18}"
+    assert json == "{\"age\":18,\"name\":\"Nikki\"}"
   end
 
   test "Transforms data from json", %{person: person} do
-    json = "{\"name\":\"Nikki\",\"age\":18}"
+    json = "{\"age\":18,\"name\":\"Nikki\"}"
     assert PersonRepresenter.from_json(json, Person) == person
   end
 end
